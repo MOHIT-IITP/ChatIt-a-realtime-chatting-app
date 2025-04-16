@@ -39,10 +39,14 @@ const SignUpPage = () => {
     <div className="flex justify-center items-center w-full h-screen  ">
       <form
         onSubmit={handleSubmit}
-        className="w-[30rem] py-20 max-w-xl bg-white shadow-lg p-8 rounded-3xl"
+        className="w-[30rem] py-20 max-w-xl bg-white -mt-30 shadow-xl p-8 rounded-3xl"
       >
-        <h2 className="text-5xl text-primary font-bold text-center  mb-6">
-          Sign Up
+        <h2 className="text-5xl text-neutral-700 font-bold text-center  mb-6"
+        style={{
+          fontFamily: "Poppins"
+        }}
+        >
+          SignUp
         </h2>
 
         <div className="mb-4">
@@ -57,7 +61,7 @@ const SignUpPage = () => {
             onChange={(e) =>
               setFormData({ ...formData, fullName: e.target.value })
             }
-            className="w-full  text-black px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full  text-black px-4 py-2 bg-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
@@ -73,7 +77,7 @@ const SignUpPage = () => {
             onChange={(e) =>
               setFormData({ ...formData, email: e.target.value })
             }
-            className="w-full text-black px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full text-black px-4 py-2 bg-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
@@ -81,7 +85,7 @@ const SignUpPage = () => {
           <label htmlFor="password" className="block text-gray-700">
             Password
           </label>
-          <div className="flex items-center border rounded-xl px-2">
+          <div className="flex items-center bg-neutral-200 rounded-xl px-2">
             <input
               id="password"
               type={showPassword ? "text" : "password"}
@@ -146,13 +150,16 @@ const SignUpPage = () => {
               ? "bg-gray-400 cursor-not-allowed"
               : "bg-neutral-500 hover:bg-neutral-600"
           }`}
+          style={{
+          fontFamily: "Poppins"
+          }}
         >
           {isSigningIn ? "Signing Up..." : "Sign Up"}
         </button>
 
-        <p className="text-center mt-4">
+        <p className="text-center text-neutral-500  mt-4">
           Already have an account?{" "}
-          <Link to="/login" className="text-blue-500 underline">
+          <Link to="/login" className="text-blue-500 font-bold">
             Login
           </Link>
         </p>

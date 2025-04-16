@@ -10,7 +10,6 @@ export const ChatContainer = () => {
   const [showinfo, setShowinfo] = useState(false);
   const [edit, setEdit] = useState(false);
   const [editText, setEditText] = useState("");
-  const [count, setCount] = useState(false);
   const {
     messages,
     getMessages,
@@ -82,7 +81,7 @@ export const ChatContainer = () => {
                 className="chat-bubble flex flex-col"
                 onClick={() =>
                   setShowinfo((prev) =>
-                    prev === message._id ? false : message._id,
+                    prev === message._id ? false : message._id
                   )
                 }
               >
@@ -113,7 +112,12 @@ export const ChatContainer = () => {
                     onChange={(e) => setEditText(e.target.value)}
                     className="border-1"
                   />
-                  <button onClick={() => handleEdit(message._id, editText)}>
+                  <button
+                    onClick={() => {
+                      handleEdit(message._id, editText);
+                      setEditText("");
+                    }}
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -176,6 +180,9 @@ export const ChatContainer = () => {
                     </ul>
                   </div>
                 </div>
+                <p className="text-sm text-neutral-500">
+                  Click on message to hide this
+                </p>
               </div>
             </div>
           </div>

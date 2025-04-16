@@ -36,7 +36,7 @@ const Navbar = () => {
             <path d="M6.8 4.7a10.45 10.45 0 0 0-2.1 2.1" />
           </svg>
 
-          <p className="text-xl  ml-4 font-bold ">CHATIT</p>
+          <p className="text-2xl tracking-wider ml-4 font-bold flex " style={{fontFamily: "Special Gothic Expanded One"}}>CHATIT</p>
         </div>
       </Link>
       <div>

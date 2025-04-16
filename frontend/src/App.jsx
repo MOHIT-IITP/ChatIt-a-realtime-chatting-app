@@ -43,7 +43,7 @@ const App = () => {
         />
         <Route
           path="/settings"
-          element={userAuth ? <SettingsPage /> : <Navigate to="/login" />} // if not user then login
+          element={ <SettingsPage />} // if not user then login
         />
         <Route
           path="/profile"
