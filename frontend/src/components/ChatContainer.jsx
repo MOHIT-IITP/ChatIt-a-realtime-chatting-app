@@ -22,18 +22,30 @@ export const ChatContainer = () => {
   const { handleDelete, handleEdit, handleReaction } = useChatStore();
   const messagesEndRef = useRef(null);
 
-  // this is work if user changes
+  // fetching messages every second so that we can see the new messages
+  useEffect(() => {
+    const interval = setInterval(() => {
+      getMessages(selectedUser._id);
+    }, 500); 
+
+    return () => clearInterval(interval); 
+  }, [selectedUser._id, getMessages]);
+
+  // this will work if user changes
   useEffect(() => {
     getMessages(selectedUser._id);
     listenToMessages();
     return () => unlinkToMessages();
   }, [selectedUser._id, getMessages, listenToMessages, unlinkToMessages]);
 
-  useEffect(() => {
-    if (messagesEndRef && messages) {
-      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    }
-  });
+  // this useeffect used because , when new message come then scroll to new message,, 
+  // but due to continuous fetching of the message this is not working properly 
+  // useEffect(() => {
+  //   if (messagesEndRef && messages) {
+  //     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  //   }
+  // });
+
   if (isMessageLoading) {
     return (
       <div className="flex-1 flex flex-col overflow-auto">
@@ -94,7 +106,10 @@ export const ChatContainer = () => {
                 )}
                 {message.text && <p>{message.text}</p>}
                 <div className="absolute -bottom-5 right-0">
-                  {message.reaction && <i class={`${message.reaction}`}></i>}
+                  {message.reaction && <i style={{
+                    fontSize: "1.5rem",
+                  }} 
+                   class={`${message.reaction}`}></i>}
                 </div>
               </div>
               <div
@@ -116,6 +131,8 @@ export const ChatContainer = () => {
                     onClick={() => {
                       handleEdit(message._id, editText);
                       setEditText("");
+                      setEdit(false);
+                      showinfo(false);
                     }}
                   >
                     <svg
@@ -137,7 +154,9 @@ export const ChatContainer = () => {
                 </div>
                 <p
                   className="cursor-pointer"
-                  onClick={() => handleDelete(message._id)}
+                  onClick={() => {handleDelete(message._id);
+                    showinfo(false);
+                  }}
                 >
                   Delete for everyone
                 </p>
@@ -148,35 +167,35 @@ export const ChatContainer = () => {
                         handleReaction(message._id, "ri-heart-fill")
                       }
                     >
-                      <i class="ri-heart-fill"></i>
+                      <i class="ri-heart-fill" style={{ fontSize: "1.5rem" }}></i>
                     </ul>
                     <ul
                       onClick={() =>
                         handleReaction(message._id, "ri-emotion-happy-fill")
                       }
                     >
-                      <i class="ri-emotion-happy-fill"></i>
+                      <i class="ri-emotion-happy-fill" style={{ fontSize: "1.5rem" }}></i>
                     </ul>
                     <ul
                       onClick={() =>
                         handleReaction(message._id, "ri-emotion-laugh-fill")
                       }
                     >
-                      <i class="ri-emotion-laugh-fill"></i>
+                      <i class="ri-emotion-laugh-fill" style={{ fontSize: "1.5rem" }}></i>
                     </ul>
                     <ul
                       onClick={() =>
                         handleReaction(message._id, "ri-skull-fill")
                       }
                     >
-                      <i class="ri-skull-fill"></i>
+                      <i class="ri-skull-fill" style={{ fontSize: "1.5rem" }}></i>
                     </ul>
                     <ul
                       onClick={() =>
                         handleReaction(message._id, "ri-emotion-sad-fill")
                       }
                     >
-                      <i class="ri-emotion-sad-fill"></i>
+                      <i class="ri-emotion-sad-fill" style={{ fontSize: "1.5rem" }}></i>
                     </ul>
                   </div>
                 </div>
